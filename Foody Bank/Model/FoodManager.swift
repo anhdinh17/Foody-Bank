@@ -12,12 +12,9 @@ protocol FoodManagerDelegate{
     func didUpdateDish(_ foodManager: FoodManager, foodModel: FoodModel)
 }
 
-
 struct FoodManager {
     
     var delegate: FoodManagerDelegate?
-    
-   // var dishArray: [Results]
     
     let foodURL = "https://api.spoonacular.com/recipes/complexSearch?&apiKey=67cad3b80c5d4a579bc26754307767c6&addRecipeInformation=true"
     
@@ -41,6 +38,7 @@ struct FoodManager {
                 }
                 if let safeData = data{
                     if let food = self.parseJSON(foodData: safeData){
+                        // whatever ViewController set itself as delegate, it executes the func didUpdateDish with parameter is FoodModel
                         self.delegate?.didUpdateDish(self, foodModel: food)
                     }
                     
@@ -61,16 +59,13 @@ struct FoodManager {
         do{
             // decodedData is an instance of FoodData Class
             let decodedData = try decoder.decode(FoodData.self, from: foodData)
-            let title = decodedData.results[3].title
-            let image = decodedData.results[3].image
+
             
             // dishArray is an array of Results struct
             let dishArray = decodedData.results
+            
             let food = FoodModel(dishArray: dishArray)
-            print(title)
-            print(image)
-            print(dishArray.count)
-            print(dishArray[9].title)
+            
             
             return food // food is now having 10 Results objects
         }catch{
