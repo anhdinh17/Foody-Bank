@@ -27,6 +27,7 @@ struct FoodManager {
     func performRequest(with urlString: String){
         // 1. Create URL
         if let url = URL(string: urlString){
+            
             //2. Create URLSession
             let session = URLSession(configuration: .default)
             
@@ -36,9 +37,10 @@ struct FoodManager {
                     print("Error networking: \(error)")
                     return
                 }
-                if let safeData = data{
+                
+                if let safeData = data{ // this data is data from server
                     if let food = self.parseJSON(foodData: safeData){
-                        // whatever ViewController set itself as delegate, it executes the func didUpdateDish with parameter is FoodModel
+                        // whichever ViewController set itself as delegate, it executes the func didUpdateDish with parameter is FoodModel
                         self.delegate?.didUpdateDish(self, foodModel: food)
                     }
                     
@@ -65,8 +67,7 @@ struct FoodManager {
             let dishArray = decodedData.results
             
             let food = FoodModel(dishArray: dishArray)
-            
-            
+                        
             return food // food is now having 10 Results objects
         }catch{
             print("Error decoding: \(error)")

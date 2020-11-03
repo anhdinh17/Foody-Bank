@@ -8,6 +8,8 @@
 
 import Foundation
 
+// FoodData is the structure of how we want to store data from server
+
 struct FoodData: Codable{
     var results: [Results]
 }

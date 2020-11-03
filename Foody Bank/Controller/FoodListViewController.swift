@@ -16,8 +16,8 @@ class FoodListViewController: UITableViewController, FoodManagerDelegate {
     
     var dishArray2:[Results] = []
     
-    var test: String = ""
-    var array = ["Alex","Jenny"]
+//    var test: String = ""
+//    var array = ["Alex","Jenny"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,9 @@ class FoodListViewController: UITableViewController, FoodManagerDelegate {
         // fetch data
         foodManager.fetchFood(query: searchBarText)
         
-        tableView.rowHeight = 130
+        tableView.rowHeight = 200
+        tableView.separatorColor = .clear
+        
     }
     
     
@@ -55,6 +57,12 @@ class FoodListViewController: UITableViewController, FoodManagerDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // cast the cell to be customized FoodTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "dishCell", for: indexPath) as! FoodTableViewCell
+        
+        // cell corner radius
+        cell.layer.cornerRadius = 20
+        
+        cell.layer.borderWidth = 3
+        cell.layer.borderColor = UIColor.white.cgColor
         
         // get the image url from array
         cell.imageURL = dishArray2[indexPath.row].image

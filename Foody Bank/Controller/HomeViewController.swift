@@ -10,13 +10,31 @@ import UIKit
 
 class HomeViewController: UIViewController{
     
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    var backgroundImageArray: [UIImage] = [
+        UIImage(named:"homeScreenImage")!,
+        UIImage(named:"food1.jpg")!,
+        UIImage(named:"food2.jpg")!,
+        UIImage(named:"food3.jpg")!,
+        UIImage(named:"food4.jpg")!,
+        UIImage(named:"food5.jpg")!,
+        UIImage(named:"food6.jpg")!,
+        UIImage(named:"food7.jpg")!,
+        UIImage(named:"food8.jpg")!,
+    ]
+    
     var testString: String = ""
 
     var foodManager = FoodManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // create a random number from 0 - 8
+        let number = Int.random(in: 0..<9)
         
+        // background will display random picture
+        backgroundImage.image = backgroundImageArray[number]
     }
     
 }
